@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { salesData } from "@/data/sales";
+import { SalesData } from "@/types/sales";
 
 import FilterBar from "@/components/molecules/FilterBar";
 import StatCard from "@/components/molecules/StatCard";
@@ -10,11 +10,40 @@ import SalesChart from "@/components/organisms/SalesChart";
 import SalesTable from "@/components/organisms/SalesTable";
 
 export default function SalesDashboard() {
+  const [allSales, setAllSales] = useState<Record<number, SalesData[]>>({});
   const [year, setYear] = useState("2024");
   const [threshold, setThreshold] = useState("50000");
   const [chartType, setChartType] = useState("bar");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const currentSales = salesData[Number(year)];
+  useEffect(() => {
+    async function fetchSales() {
+      try {
+        const response = await fetch("/api/sales");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch sales data");
+        }
+
+        const data: Record<number, SalesData[]> =
+          await response.json();
+
+        setAllSales(data);
+      } catch {
+        setError("Failed to load sales data.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchSales();
+  }, []);
+
+  const currentSales = useMemo(
+  () => allSales[Number(year)] ?? [],
+  [allSales, year]
+);
 
   const filteredSales = useMemo(() => {
     const thresholdValue = Number(threshold);
@@ -33,15 +62,37 @@ export default function SalesDashboard() {
     0
   );
 
-  const averageSales = totalSales / currentSales.length;
+  const averageSales =
+    currentSales.length > 0
+      ? totalSales / currentSales.length
+      : 0;
 
-  const highestSales = Math.max(
-    ...currentSales.map((item) => item.sales)
-  );
+  const highestSales =
+    currentSales.length > 0
+      ? Math.max(...currentSales.map((item) => item.sales))
+      : 0;
 
   const highestMonth = currentSales.find(
     (item) => item.sales === highestSales
   );
+
+  if (loading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-gray-50">
+        <p className="text-lg text-gray-600">
+          Loading sales data...
+        </p>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-gray-50">
+        <p className="text-lg text-red-600">{error}</p>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 p-6 md:p-10">
@@ -102,12 +153,9 @@ export default function SalesDashboard() {
             data={filteredSales}
             chartType={chartType}
           />
-          </div>
+        </div>
 
-          <SalesTable data={filteredSales} />
-
-
-        
+        <SalesTable data={filteredSales} />
       </div>
     </main>
   );
