@@ -1,36 +1,199 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sales Analytics Dashboard
 
-## Getting Started
+A responsive sales analytics dashboard built with **Next.js 15, TypeScript, Tailwind CSS, and Recharts**.
 
-First, run the development server:
+The application allows users to analyze sales data for **2022, 2023, and 2024** using interactive filters, statistics, charts, and a monthly sales table.
+
+## Features
+
+* Sales dashboard for 2022, 2023, and 2024
+* Year selection filter
+* Custom sales threshold filter
+* Bar chart visualization
+* Line chart visualization
+* Pie chart visualization
+* Total sales calculation
+* Average monthly sales calculation
+* Highest monthly sales calculation
+* Monthly sales table
+* Responsive UI
+* Reusable component-based architecture
+* Atomic design-inspired component structure
+* TypeScript type safety
+
+## Technologies Used
+
+* Next.js 15
+* React
+* TypeScript
+* Tailwind CSS
+* Recharts
+* Node.js
+* npm
+
+## Project Structure
+
+```text
+sales-dashboard/
+│
+├── app/
+│   ├── dashboard/
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── atoms/
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   │   └── Select.tsx
+│   │
+│   ├── molecules/
+│   │   ├── FilterBar.tsx
+│   │   └── StatCard.tsx
+│   │
+│   ├── organisms/
+│   │   ├── SalesChart.tsx
+│   │   └── SalesTable.tsx
+│   │
+│   └── dashboard/
+│       └── SalesDashboard.tsx
+│
+├── data/
+│   └── sales.ts
+│
+├── types/
+│   └── sales.ts
+│
+├── public/
+│
+├── package.json
+└── README.md
+```
+
+## Atomic Component Structure
+
+The project follows an atomic/component-based approach.
+
+### Atoms
+
+Small reusable UI elements such as:
+
+* Button
+* Input
+* Select
+
+### Molecules
+
+Components created by combining atoms:
+
+* FilterBar
+* StatCard
+
+### Organisms
+
+Larger functional UI sections:
+
+* SalesChart
+* SalesTable
+
+### Dashboard
+
+The main dashboard component combines the reusable components and manages the application state.
+
+## Sales Data
+
+The project currently uses mock sales data for the years **2022, 2023, and 2024**.
+
+The data contains monthly sales values and is stored in:
+
+```text
+data/sales.ts
+```
+
+The data can later be replaced with data retrieved from an external API or a Kaggle dataset.
+
+## Filters
+
+### Year Filter
+
+Users can select:
+
+* 2022
+* 2023
+* 2024
+
+### Sales Threshold
+
+Users can enter their own sales threshold.
+
+For example:
+
+```text
+50000
+```
+
+The dashboard will display only months where sales are greater than or equal to the selected threshold.
+
+## Chart Types
+
+The dashboard supports three chart types:
+
+* Bar Chart
+* Line Chart
+* Pie Chart
+
+Charts are implemented using **Recharts**.
+
+## Statistics
+
+The dashboard calculates:
+
+* Total Sales
+* Average Monthly Sales
+* Highest Sales
+* Highest Sales Month
+
+These values update when the selected year changes.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+Move into the project directory:
+
+```bash
+cd sales-dashboard
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+## Run the Development Server
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the application in your browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The homepage automatically redirects to:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+http://localhost:3000/dashboard
+``
+```
