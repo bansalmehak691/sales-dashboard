@@ -1,199 +1,126 @@
 # Sales Analytics Dashboard
 
-A responsive sales analytics dashboard built with **Next.js 15, TypeScript, Tailwind CSS, and Recharts**.
-
-The application allows users to analyze sales data for **2022, 2023, and 2024** using interactive filters, statistics, charts, and a monthly sales table.
+A responsive sales analytics dashboard built using Next.js 15, TypeScript, Tailwind CSS, and Recharts.
 
 ## Features
 
-* Sales dashboard for 2022, 2023, and 2024
-* Year selection filter
-* Custom sales threshold filter
-* Bar chart visualization
-* Line chart visualization
-* Pie chart visualization
-* Total sales calculation
-* Average monthly sales calculation
-* Highest monthly sales calculation
-* Monthly sales table
-* Responsive UI
-* Reusable component-based architecture
-* Atomic design-inspired component structure
-* TypeScript type safety
+- Sales data for 2022, 2023, and 2024
+- Year filter
+- Custom sales threshold filter
+- Bar chart
+- Line chart
+- Pie chart
+- Total sales
+- Average monthly sales
+- Highest monthly sales
+- Monthly sales table
+- Responsive design
 
 ## Technologies Used
 
-* Next.js 15
-* React
-* TypeScript
-* Tailwind CSS
-* Recharts
-* Node.js
-* npm
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- React
+- Recharts
+- Node.js
+- GitHub
+- Vercel
 
 ## Project Structure
 
-```text
-sales-dashboard/
-│
-├── app/
-│   ├── dashboard/
-│   │   └── page.tsx
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-│
-├── components/
-│   ├── atoms/
-│   │   ├── Button.tsx
-│   │   ├── Input.tsx
-│   │   └── Select.tsx
-│   │
-│   ├── molecules/
-│   │   ├── FilterBar.tsx
-│   │   └── StatCard.tsx
-│   │
-│   ├── organisms/
-│   │   ├── SalesChart.tsx
-│   │   └── SalesTable.tsx
-│   │
-│   └── dashboard/
-│       └── SalesDashboard.tsx
-│
-├── data/
-│   └── sales.ts
-│
-├── types/
-│   └── sales.ts
-│
-├── public/
-│
-├── package.json
-└── README.md
-```
+The project follows an atomic component structure:
 
-## Atomic Component Structure
-
-The project follows an atomic/component-based approach.
-
-### Atoms
-
-Small reusable UI elements such as:
-
-* Button
-* Input
-* Select
-
-### Molecules
-
-Components created by combining atoms:
-
-* FilterBar
-* StatCard
-
-### Organisms
-
-Larger functional UI sections:
-
-* SalesChart
-* SalesTable
-
-### Dashboard
-
-The main dashboard component combines the reusable components and manages the application state.
+- Atoms: Button, Input, Select
+- Molecules: FilterBar, StatCard
+- Organisms: SalesChart, SalesTable
+- Dashboard: SalesDashboard
 
 ## Sales Data
 
-The project currently uses mock sales data for the years **2022, 2023, and 2024**.
+The project uses an FMCG Daily Sales dataset covering 2022–2024.
 
-The data contains monthly sales values and is stored in:
+The daily sales data is processed and converted into monthly sales.
 
-```text
-data/sales.ts
-```
+Sales are calculated as:
 
-The data can later be replaced with data retrieved from an external API or a Kaggle dataset.
+Sales = Price per Unit × Units Sold
+
+The data is provided through the Next.js API route:
+
+/api/sales
 
 ## Filters
 
-### Year Filter
+Users can select a year:
 
-Users can select:
+- 2022
+- 2023
+- 2024
 
-* 2022
-* 2023
-* 2024
+Users can also enter their own sales threshold to filter the displayed months.
 
-### Sales Threshold
-
-Users can enter their own sales threshold.
-
-For example:
-
-```text
-50000
-```
-
-The dashboard will display only months where sales are greater than or equal to the selected threshold.
-
-## Chart Types
+## Charts
 
 The dashboard supports three chart types:
 
-* Bar Chart
-* Line Chart
-* Pie Chart
+- Bar Chart
+- Line Chart
+- Pie Chart
 
-Charts are implemented using **Recharts**.
-
-## Statistics
-
-The dashboard calculates:
-
-* Total Sales
-* Average Monthly Sales
-* Highest Sales
-* Highest Sales Month
-
-These values update when the selected year changes.
+Charts are created using Recharts.
 
 ## Installation
 
 Clone the repository:
 
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-```
+git clone https://github.com/bansalmehak691/sales-dashboard.git
 
-Move into the project directory:
+Go to the project folder:
 
-```bash
 cd sales-dashboard
-```
 
 Install dependencies:
 
-```bash
 npm install
-```
-
-## Run the Development Server
 
 Start the development server:
 
-```bash
 npm run dev
-```
 
-Open the application in your browser:
+Open:
 
-```text
 http://localhost:3000
-```
 
-The homepage automatically redirects to:
+## Production Build
 
-```text
-http://localhost:3000/dashboard
-``
-```
+To create a production build:
+
+npm run build
+
+## GitHub Repository
+
+https://github.com/bansalmehak691/sales-dashboard
+
+## Live Website
+
+https://sales-dashboard-three-psi.vercel.app
+
+## What I Did
+
+- Created a Next.js 15 project.
+- Used TypeScript and Tailwind CSS.
+- Created reusable components using atomic design principles.
+- Added real sales dataset from Kaggle.
+- Created an API route for the sales data.
+- Added filters for year and sales threshold.
+- Added Bar, Line, and Pie charts.
+- Added sales statistics.
+- Added a monthly sales table.
+- Tested the project locally.
+- Built and deployed the project using Vercel.
+- Uploaded the project to GitHub.
+
+## Author
+
+Mehak Bansal
